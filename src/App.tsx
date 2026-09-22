@@ -82,6 +82,11 @@ export default function App() {
     }, 200);
   }, []);
 
+  const [heroTitle, setHeroTitle] = useLocalStorage<string>(
+  'spinly_hero_title',
+  'Let the wheel decide.',
+);
+
   /* ---- URL sharing (optional) ---- */
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -110,10 +115,21 @@ export default function App() {
     <div className="app">
       <Header theme={theme} onToggleTheme={toggleTheme} />
 
+      {/* <section className="hero">
+        <h1>Let the wheel decide.</h1>
+        <p>Add your choices, give it a spin, and let fate pick one.</p>
+      </section> */}
+
       <section className="hero">
-        {/* <h1>Let the wheel decide.</h1>
-        <p>Add your choices, give it a spin, and let fate pick one.</p> */}
-      </section>
+  <input
+    type="text"
+    value={heroTitle}
+    onChange={(e) => setHeroTitle(e.target.value)}
+    className="hero-title-input"
+    aria-label="Wheel title"
+    maxLength={60}
+  />
+</section>
 
       <main className="main-content">
         <div className={`main-layout${isChoicesOpen ? '' : ' panel-closed'}`}>
